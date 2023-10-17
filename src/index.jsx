@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import Stage from './components/Stage';
 import './style.css';
+import Countdown from 'react-countdown';
 
 const App = () => {
   return (
