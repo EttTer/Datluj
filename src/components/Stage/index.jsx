@@ -21,7 +21,7 @@ const generateWord = (size) => {
 const Stage = () => {
   //const [words, setWords] = useState([generateWord(6), generateWord(6), generateWord(6)]);
   const [mistakes, setMistakes] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [wordsWritten, setWordsWritten] = useState(0);
   const [mistakeWords, setMistakeWords] = useState([]);
   const [mistakesByWord, setMistakesByWord] = useState([0, 0, 0]);
@@ -42,38 +42,37 @@ const Stage = () => {
 
   useEffect(() => {
     if (timeLeft === 0) {
-      let message = `Hra skončila. Stihl(a) jsi napsat ${wordsWritten} slov(a) a udělal(a) jsi ${mistakes} chyb(a). \n\n`;
-
+      let message = `Hra skončila. Napsal(a) jsi ${wordsWritten} slov(a) a přitom jsi udělal(a) ${mistakes} chyb(a). \n\n`;
+  
       if (mistakeWords.length > 0) {
         message += 'Slova s chybou:\n';
         const uniqueMistakeWords = [...new Set(mistakeWords)]; 
-
+  
         uniqueMistakeWords.forEach((word) => {
           const mistakesInWord = mistakeWords.filter(w => w === word).length;
           message += `Slovo ${word} - ${mistakesInWord} chyb(y)\n`;
         });
       }
-
-      const playerName = prompt("Zadejte své jméno:");
+  
+      const layerNampe = prompt("Zadejte své jméno:");
       setPlayerName(playerName);
-
+  
       const result = {
         playerName: playerName,
-        wordsWritten: wordsWritten,
+        wordsWritten: wordsWritten, 
         mistakes: mistakes
       };
-
+  
       // výsledky do localStorage
       if (playerName && playerName.trim() !== "") {
         const results = JSON.parse(localStorage.getItem("results")) || [];
         results.push(result);
         localStorage.setItem("results", JSON.stringify(results));
       }
-
+  
       alert(message);
     }
-  }, [timeLeft, wordsWritten, mistakes, mistakeWords]);
-
+  }, [timeLeft, words, mistakes, mistakeWords]);
   const handleFinish = (wordIndex) => {
     const newWords = [...words.slice(1), generateWord(wordsLength)]; 
     setWords(newWords);
@@ -87,7 +86,7 @@ const Stage = () => {
       if (wordsLength < 20) { 
         setWordsLength(prevLength => prevLength + 1); 
         setWords([...newWords.slice(0, 2), generateWord(wordsLength + 1)]);
-        setWordsWritten(0);
+        //setWordsWritten(0);
       }
     }
   };

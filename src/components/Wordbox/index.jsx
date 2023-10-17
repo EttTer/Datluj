@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 
-const Wordbox = ({ word, onFinish, active, onMistake, wordIndex }) => {
+const Wordbox = ({ word, onFinish, active, onMistake, wordIndex, wordsWritten }) => {
   const [lettersLeft, setLettersLeft] = useState(word);
   const [mistake, setMistake] = useState(false);
 
