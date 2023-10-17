@@ -27,19 +27,26 @@ const Stage = () => {
   const [mistakesByWord, setMistakesByWord] = useState([0, 0, 0]);
 
   useEffect(() => {
-    if (timeLeft > 0) {
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
+      if (timeLeft > 0) {
         setTimeLeft(prevTime => prevTime - 1);
-      }, 1000);
+      }
+    }, 1000);
 
-      return () => clearTimeout(timer);
-    } else {
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
+
+  useEffect(() => {
+    if (timeLeft === 0) {
       let message = `Hra skončila. Stihl(a) jsi napsat ${wordsWritten} slov(a) a udělal(a) jsi ${mistakes} chyb(a). \n\n`;
 
       if (mistakeWords.length > 0) {
         message += 'Slova s chybou:\n';
-        mistakeWords.forEach((word, index) => {
-          message += `Slovo ${word} - ${mistakesByWord[index]} chyb(y)\n`;
+        const uniqueMistakeWords = [...new Set(mistakeWords)]; 
+
+        uniqueMistakeWords.forEach((word) => {
+          const mistakesInWord = mistakeWords.filter(w => w === word).length;
+          message += `Slovo ${word} - ${mistakesInWord} chyb(y)\n`;
         });
       }
 
@@ -51,7 +58,7 @@ const Stage = () => {
     const newWords = [...words.slice(1), generateWord(6)];
     setWords(newWords);
     setWordsWritten(prevWordsWritten => prevWordsWritten + 1);
-
+  
     const newMistakesByWord = [...mistakesByWord];
     newMistakesByWord[wordIndex] = 0;
     setMistakesByWord(newMistakesByWord);
