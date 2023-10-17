@@ -25,6 +25,7 @@ const Stage = () => {
   const [wordsWritten, setWordsWritten] = useState(0);
   const [mistakeWords, setMistakeWords] = useState([]);
   const [mistakesByWord, setMistakesByWord] = useState([0, 0, 0]);
+  const [playerName, setPlayerName] = useState(""); // state pro ukládání jména 
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,9 +51,25 @@ const Stage = () => {
         });
       }
 
+      const playerName = prompt("Zadejte své jméno:");
+      setPlayerName(playerName);
+
+      const result = {
+        playerName: playerName,
+        wordsWritten: wordsWritten,
+        mistakes: mistakes
+      };
+
+      // Uložení výsledku do localStorage
+      if (playerName && playerName.trim() !== "") {
+        const results = JSON.parse(localStorage.getItem("results")) || [];
+        results.push(result);
+        localStorage.setItem("results", JSON.stringify(results));
+      }
+
       alert(message);
     }
-  }, [timeLeft, wordsWritten, mistakes, mistakeWords, mistakesByWord]);
+  }, [timeLeft, wordsWritten, mistakes, mistakeWords]);
 
   const handleFinish = (wordIndex) => {
     const newWords = [...words.slice(1), generateWord(6)];
