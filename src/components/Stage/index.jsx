@@ -21,8 +21,10 @@ const generateWord = (size) => {
 const Stage = () => {
   const [words, setWords] = useState([generateWord(6), generateWord(6), generateWord(6)]);
   const [mistakes, setMistakes] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [wordsWritten, setWordsWritten] = useState(0);
+  const [mistakeWords, setMistakeWords] = useState([]);
+  const [mistakesByWord, setMistakesByWord] = useState([0, 0, 0]);
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -32,24 +34,38 @@ const Stage = () => {
 
       return () => clearTimeout(timer);
     } else {
-      alert(`Hra skončila. Stihl(a) jsi napsat ${wordsWritten} slov(a) a udělal(a) jsi ${mistakes} chyb(a).`);
-    }
-  }, [timeLeft, wordsWritten, mistakes]);
+      let message = `Hra skončila. Stihl(a) jsi napsat ${wordsWritten} slov(a) a udělal(a) jsi ${mistakes} chyb(a). \n\n`;
 
-  const handleFinish = () => {
+      if (mistakeWords.length > 0) {
+        message += 'Slova s chybou:\n';
+        mistakeWords.forEach((word, index) => {
+          message += `Slovo ${word} - ${mistakesByWord[index]} chyb(y)\n`;
+        });
+      }
+
+      alert(message);
+    }
+  }, [timeLeft, wordsWritten, mistakes, mistakeWords, mistakesByWord]);
+
+  const handleFinish = (wordIndex) => {
     const newWords = [...words.slice(1), generateWord(6)];
     setWords(newWords);
     setWordsWritten(prevWordsWritten => prevWordsWritten + 1);
+
+    const newMistakesByWord = [...mistakesByWord];
+    newMistakesByWord[wordIndex] = 0;
+    setMistakesByWord(newMistakesByWord);
   };
 
-  const handleMistake = () => {
+  const handleMistake = (wordIndex) => {
     setMistakes(prevMistakes => prevMistakes + 1);
+    setMistakeWords(prevMistakeWords => [...prevMistakeWords, words[wordIndex]]);
   };
 
   return (
     <div className="stage">
       <div className="stage__mistakes">Chyb: {mistakes}</div>
-      <div className="stage__timeLeft">Zbývající čas: {Math.floor(timeLeft / 60)}:{timeLeft % 60}</div>
+      <div className="stage__timeLeft">Čas zbývající: {Math.floor(timeLeft / 60)}:{timeLeft % 60}</div>
       <div className="stage__words">
         {words.map((word, index) => (
           <Wordbox 
@@ -58,6 +74,7 @@ const Stage = () => {
             onFinish={handleFinish} 
             active={index === 0} 
             onMistake={handleMistake}  
+            wordIndex={index}
           />
         ))}
       </div>
@@ -66,6 +83,7 @@ const Stage = () => {
 };
 
 export default Stage;
+
 /* 4. úkol
 import React, { useState } from 'react';
 import Wordbox from '../Wordbox';

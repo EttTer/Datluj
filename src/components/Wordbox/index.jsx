@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 
-const Wordbox = ({ word, onFinish, active, onMistake }) => {
+const Wordbox = ({ word, onFinish, active, onMistake, wordIndex }) => {
   const [lettersLeft, setLettersLeft] = useState(word);
   const [mistake, setMistake] = useState(false);
 
@@ -14,11 +14,11 @@ const Wordbox = ({ word, onFinish, active, onMistake }) => {
           setLettersLeft(updatedLetters);
 
           if (updatedLetters === '') {
-            onFinish();
+            onFinish(wordIndex);
           }
         } else {
           setMistake(true);
-          onMistake();
+          onMistake(wordIndex);
         }
       };
 
@@ -28,7 +28,7 @@ const Wordbox = ({ word, onFinish, active, onMistake }) => {
         document.removeEventListener('keyup', handleKeyUp);
       };
     }
-  }, [lettersLeft, onFinish, active, onMistake]);
+  }, [lettersLeft, onFinish, active, onMistake, wordIndex]);
 
   const wordboxClassName = mistake
     ? 'wordbox wordbox--mistake'
