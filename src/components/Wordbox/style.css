@@ -17,3 +17,8 @@
   background-color: #e64747;
   color: white;
 }
+
+.wordbox--active {
+  background-color:#307c3b91 ; /* nebo jakoukoli jinou formu zdůraznění */
+  color: #ffffff; 
+}
