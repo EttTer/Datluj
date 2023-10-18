@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Wordbox from '../Wordbox';
 import wordList from '../../word-list';
@@ -19,16 +18,15 @@ const generateWord = (size) => {
 };
 
 const Stage = () => {
-  //const [words, setWords] = useState([generateWord(6), generateWord(6), generateWord(6)]);
   const [mistakes, setMistakes] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(20);
   const [wordsWritten, setWordsWritten] = useState(0);
   const [mistakeWords, setMistakeWords] = useState([]);
   const [mistakesByWord, setMistakesByWord] = useState([0, 0, 0]);
   const [playerName, setPlayerName] = useState(""); // state pro ukládání jména 
 
-    const [wordsLength, setWordsLength] = useState(3); // délka slov právě teď
-    const [words, setWords] = useState([...Array(3)].map(() => generateWord(wordsLength))); // seznam slov s určitou délkou
+  const [wordsLength, setWordsLength] = useState(3); // délka slov právě teď
+  const [words, setWords] = useState([...Array(3)].map(() => generateWord(3))); // seznam slov s určitou délkou
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,7 +53,7 @@ const Stage = () => {
       }
   
       const layerNampe = prompt("Zadejte své jméno:");
-      setPlayerName(playerName);
+      setPlayerName(layerNampe); // Oprava: měla bys použít layerNampe místo playerName
   
       const result = {
         playerName: playerName,
@@ -73,6 +71,7 @@ const Stage = () => {
       alert(message);
     }
   }, [timeLeft, words, mistakes, mistakeWords]);
+  
   const handleFinish = (wordIndex) => {
     const newWords = [...words.slice(1), generateWord(wordsLength)]; 
     setWords(newWords);
@@ -82,11 +81,16 @@ const Stage = () => {
     newMistakesByWord[wordIndex] = 0;
     setMistakesByWord(newMistakesByWord);
 
-    if (wordsWritten >= 5) { 
+    if (wordsWritten === 2) { // Pokud bylo napsáno 2 slova, přidá další 2 slova o délce 3
+      const newWords = [...words.slice(2), generateWord(3), generateWord(3)]; 
+      setWords(newWords);
+      setWordsWritten(prevWordsWritten => prevWordsWritten + 2); // Přidá dvě slova
+    }
+
+    if (wordsWritten % 5 === 0 && wordsWritten > 0) { 
       if (wordsLength < 20) { 
         setWordsLength(prevLength => prevLength + 1); 
         setWords([...newWords.slice(0, 2), generateWord(wordsLength + 1)]);
-        //setWordsWritten(0);
       }
     }
   };

@@ -46,6 +46,9 @@ const Wordbox = ({ word, onFinish, active, onMistake, wordIndex, wordsWritten })
 };
 
 export default Wordbox;
+
+
+
 /* čtvrtý úkol
 import React, { useState, useEffect } from 'react';
 import './style.css';
