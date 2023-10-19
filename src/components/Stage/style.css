@@ -17,3 +17,21 @@
   flex-wrap: wrap;
   align-items: center;
 }
+
+.stage__buttons {
+  margin-top: 20px; /* Adjust this value as needed */
+}
+
+.stage__buttons button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Adjust color as needed */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.stage__timeLeft.paused {
+  color: #ff0000; /* Adjust color as needed */
+  font-weight: bold;
+}
