@@ -5,6 +5,7 @@ import Starter from "./components/Starter"
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import './style.css';
+import Result from "./components/Results";
 
 const App = () => {
   return (  <><header>
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/starter",
         element: <Starter />,
+      },
+      {
+        path: "/result",
+        element: <Result/>,
       },
     ],
   },
