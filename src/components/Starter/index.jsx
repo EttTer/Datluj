@@ -152,7 +152,7 @@ const Starter = () => {
       <Link to="/">Přejít na úvodní stranu</Link>
       <Link to="/stage">Zahrát si hru s časovým limitem</Link>
 
-      <Modal show={isModalOpen} onHide={handleModalClose}>
+      <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
         <Modal.Header closeButton>
           <Modal.Title>Game Over</Modal.Title>
         </Modal.Header>
