@@ -5,6 +5,7 @@ import './style.css';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { projectFirestore } from '../../firebase/config';
 
 const generateWord = (size) => {
   const sizeIndex = size === undefined
@@ -128,6 +129,19 @@ const Stage = () => {
         const results = JSON.parse(localStorage.getItem("results")) || [];
         results.push(result);
         localStorage.setItem("results", JSON.stringify(results));
+
+        const firebaseResult = {
+          playerName: playerName,
+          wordsWritten: wordsWritten, 
+          mistakes: mistakes
+        }
+
+        try {
+           projectFirestore.collection("players").add(firebaseResult);
+          console.log("Result added successfully");
+        } catch (error) {
+          console.error("Error adding result: ", error);
+        }
        
       }
     }
@@ -198,6 +212,8 @@ const Stage = () => {
 };
 
 export default Stage;
+
+
 /* funkční před modálním oknem
 import React, { useState, useEffect } from 'react';
 import Wordbox from '../Wordbox';
