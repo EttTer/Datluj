@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Wordbox from '../Wordbox';
 import wordList from '../../word-list';
 import './style.css';
+import { Link } from 'react-router-dom';
 
 const generateWord = (size) => {
   const sizeIndex = size === undefined
@@ -67,7 +68,7 @@ const Stage = () => {
         });
       }
   
-      const playerName = prompt("Zadejte své jméno:"); // Use local variable playerName
+      const playerName = prompt("Zadejte své jméno:"); // zažádá jméno playerName
   
       const result = {
         playerName: playerName,
@@ -117,7 +118,7 @@ const Stage = () => {
   };
 
   const restartGame = () => {
-    setIsGameStarted(true); // Přidáno - označí, že hra začala
+    setIsGameStarted(true); // hra začala
     setMistakes(0);
     setTimeLeft(20);
     setWordsWritten(0);
@@ -145,8 +146,8 @@ const Stage = () => {
     <div className="stage">
       <div className="stage__mistakes">Chyb: {mistakes}</div>
       <div className={`stage__timeLeft ${isPaused ? 'paused' : ''}`}>
-  Čas zbývající: {Math.floor(timeLeft / 60)}:{timeLeft % 60}
-</div>
+        Čas zbývající: {Math.floor(timeLeft / 60)}:{timeLeft % 60}
+      </div>
       <div className="stage__words">
         {words.map((word, index) => (
           <Wordbox 
@@ -160,15 +161,23 @@ const Stage = () => {
         ))}
       </div>
       <div className="stage__buttons">
-      <div className="stage__buttons">
-  {isPaused ? (
-    <button onClick={handleTogglePause}>Resume Game</button>
-  ) : (
-    <button onClick={handleTogglePause}>Pause Game</button>
-  )}
-</div>
-      <button onClick={restartGame}>Start Game</button>
-</div>
+        {isGameStarted && timeLeft > 0 && (
+          <button onClick={handleTogglePause}>
+            {isPaused ? 'Resume Game' : 'Pause Game'}
+          </button>
+        )}
+        {isGameStarted && (
+          <button onClick={restartGame}>Start New Game</button>
+        )}
+        {!isGameStarted && timeLeft === 0 && (
+          <button onClick={restartGame}>Start New Game</button>
+        )}
+        {!isGameStarted && timeLeft > 0 && (
+          <button onClick={restartGame}>Start Game</button>
+        )}
+      </div>
+      <Link to="/">Přejít na úvodní stranu</Link>
+      <Link to="/starter">Chci trénovat bez limitu</Link>
     </div>
   );
 };

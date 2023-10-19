@@ -1,6 +1,7 @@
 import Stage from "./components/Stage";
 import StartPage from "./components/StartPage";
 import React, { useState } from 'react';
+import Starter from "./components/Starter"
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import './style.css';
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/stage",
         element: <Stage />,
+      },
+      {
+        path: "/starter",
+        element: <Starter />,
       },
     ],
   },

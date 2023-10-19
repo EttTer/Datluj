@@ -6,6 +6,7 @@ const StartPage = () => {
     <div>
       <h2>Start Page</h2>
     <Link to="/stage">Přejít na Stage</Link>
+    <Link to="/starter">Přejít na Starter</Link>
     </div>
   );
 };
