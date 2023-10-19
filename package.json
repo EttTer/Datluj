@@ -22,6 +22,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
+    "firebase": "^8.10.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-countdown": "^2.3.5",

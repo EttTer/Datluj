@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import './style.css';
 import Result from "./components/Results";
+import { projectFirestore } from "./firebase/config";
 
 const App = () => {
   return (  <><header>
