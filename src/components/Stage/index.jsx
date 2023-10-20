@@ -138,9 +138,9 @@ const Stage = () => {
 
         try {
            projectFirestore.collection("players").add(firebaseResult);
-          console.log("Result added successfully");
+          console.log("Výsledky hráče byly přidány");
         } catch (error) {
-          console.error("Error adding result: ", error);
+          console.error("Přidání hráče selhalo ", error);
         }
        
       }
