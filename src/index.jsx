@@ -21,7 +21,7 @@ const App = () => {
       </main>
     </div>
       <footer>
-        <p className="footer-text">Aplikace na procvičování psaní © Tereza Ettlerová</p>
+        <p className="footer-text">© Tereza Ettlerová</p>
       </footer></>
   );
 };

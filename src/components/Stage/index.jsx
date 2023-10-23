@@ -148,8 +148,9 @@ const Stage = () => {
   };
 
   return (
+ 
     <div className="stage">
-      <div className="stage__mistakes">Chyb: {mistakes}</div>
+      <h2 className="stage__mistakes">Chyb: {mistakes}</h2>
       <div className={`stage__timeLeft ${isPaused ? 'paused' : ''}`}>
         Čas zbývající: {Math.floor(timeLeft / 60)}:{timeLeft % 60}
       </div>
@@ -181,8 +182,12 @@ const Stage = () => {
           <button onClick={restartGame}>Start Game</button>
         )}
       </div>
-      <Link to="/">Přejít na úvodní stranu</Link>
-      <Link to="/starter">Chci trénovat bez limitu</Link>
+      <div className='Start_page_container'>
+      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
+      <button className='Start_page_button'><Link className to="/starter">Hra bez časovéhu limitu</Link></button>
+      
+      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button>
+</div>
 
       <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
         <Modal.Header closeButton>

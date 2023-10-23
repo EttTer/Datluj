@@ -140,7 +140,7 @@ const Starter = () => {
 
   return (
     <div className="stage">
-      <div className="stage__mistakes">Chyb: {mistakes}</div>
+      <h2 className="stage__mistakes">Chyb: {mistakes}</h2>
       <div className="stage__words">
         {words.map((word, index) => (
           <Wordbox 
@@ -163,10 +163,12 @@ const Starter = () => {
           <button onClick={restartGame}>Start New Game</button>
         )}
       </div>
-
-      <Link to="/">Přejít na úvodní stranu</Link>
-      <Link to="/stage">Zahrát si hru s časovým limitem</Link>
-
+<div className='Start_page_container'>
+      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
+      <button className='Start_page_button'><Link className to="/stage">Hra s časovým limitem</Link></button>
+      
+      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button>
+</div>
       <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
         <Modal.Header closeButton>
           <Modal.Title>Game Over</Modal.Title>
