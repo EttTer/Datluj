@@ -7,10 +7,12 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import './style.css';
 import Result from "./components/Results";
 import { projectFirestore } from "./firebase/config";
+import background from "../public/pictures/background.png"
+
 
 const App = () => {
   return (  <><header>
-        <div className="header-text">Datluj</div>
+        <div className="header-text"></div>
       </header>
     <div className="container">
     
@@ -18,8 +20,8 @@ const App = () => {
         <Outlet />
       </main>
     </div>
-    <footer>
-        <p> © Tereza Ettlerová</p>
+      <footer>
+        <p className="footer-text">Aplikace na procvičování psaní © Tereza Ettlerová</p>
       </footer></>
   );
 };

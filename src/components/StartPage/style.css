@@ -1,0 +1,27 @@
+h2 {
+   text-align: center;
+   font-size: 42px;
+   color: #3C3744;
+ 
+ }
+ 
+
+.Start_page_background {
+ 
+  position: relative;
+   
+   background-image: url("../../../public/pictures/picture1.png");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+
+}
+
+
+.Start_page_container {
+   padding: 5vh;
+   display: grid;
+   gap: 40px;
+   justify-content: center
+   
+}
+
