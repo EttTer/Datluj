@@ -55,7 +55,7 @@ const Result = () => {
  
             <div> {error && <p> {error}</p>}</div>
             <div className='subtitles_container'>
-            <h2 className='subtitle'> Výsledky</h2>
+            <h2 className='title'> Výsledky</h2>
             <p className='description'> Pořadí výsledků se řídí hodnotou skóre - počet napsaný slov - chyby</p>
             </div>
             <div className='results'>
