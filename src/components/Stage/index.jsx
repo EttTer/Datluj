@@ -147,12 +147,19 @@ const Stage = () => {
     }
   };
 
-  return (
+  return (<>
+  <div className='Stage_page_container'>
+      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
+      <button className='Start_page_button'><Link className to="/starter">Hra bez časovéhu limitu</Link></button>
+      
+      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button></div>
  
     <div className="stage">
-      <h2 className="stage__mistakes">Chyb: {mistakes}</h2>
+    
+    
+      <h2 className="stage__mistakes">Chyby: {mistakes}</h2>
       <div className={`stage__timeLeft ${isPaused ? 'paused' : ''}`}>
-        Čas zbývající: {Math.floor(timeLeft / 60)}:{timeLeft % 60}
+        Zbývá: {Math.floor(timeLeft / 60)}:{timeLeft % 60} sekund
       </div>
       <div className="stage__words">
         {words.map((word, index) => (
@@ -182,12 +189,7 @@ const Stage = () => {
           <button onClick={restartGame}>Start Game</button>
         )}
       </div>
-      <div className='Start_page_container'>
-      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
-      <button className='Start_page_button'><Link className to="/starter">Hra bez časovéhu limitu</Link></button>
       
-      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button>
-</div>
 
       <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
         <Modal.Header closeButton>
@@ -212,7 +214,8 @@ const Stage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div></>
+    
   );
 };
 

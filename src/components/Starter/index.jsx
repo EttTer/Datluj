@@ -139,6 +139,14 @@ const Starter = () => {
   };
 
   return (
+<>
+    <div className='Stage_page_container'>
+      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
+      <button className='Start_page_button'><Link className to="/stage">Hra s časovým limitem</Link></button>
+      
+      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button></div>
+ 
+   
     <div className="stage">
       <h2 className="stage__mistakes">Chyb: {mistakes}</h2>
       <div className="stage__words">
@@ -163,12 +171,7 @@ const Starter = () => {
           <button onClick={restartGame}>Start New Game</button>
         )}
       </div>
-<div className='Start_page_container'>
-      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
-      <button className='Start_page_button'><Link className to="/stage">Hra s časovým limitem</Link></button>
-      
-      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button>
-</div>
+
       <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
         <Modal.Header closeButton>
           <Modal.Title>Game Over</Modal.Title>
@@ -192,7 +195,7 @@ const Starter = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div></>
   );
 };
 
