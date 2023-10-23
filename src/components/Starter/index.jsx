@@ -164,17 +164,17 @@ const Starter = () => {
       <div className="stage__buttons">
         {isGameStarted && (
           <button onClick={handleGameEnd}>
-            End Game
+            Konec hry
           </button>
         )}
         {!isGameStarted && (
-          <button onClick={restartGame}>Start New Game</button>
+          <button onClick={restartGame}>Začít novou hru</button>
         )}
       </div>
 
       <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
-        <Modal.Header closeButton>
-          <Modal.Title>Game Over</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>Konec hry</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>Napsal(a) jsi {wordsWritten} slov u dělal(a) v nich  {mistakes} chyb.</p>
@@ -183,7 +183,7 @@ const Starter = () => {
               <p>Slova s chybami:</p>
               <ul>
                 { [...new Set(mistakeWords)].map(word => (
-                  <li key={word}>{word} - {mistakeWords.filter(w => w === word).length} mistake(s)</li>
+                  <li key={word}>slovo: {word} - {mistakeWords.filter(w => w === word).length} chyb</li>
                 ))}
               </ul>
             </div>
@@ -191,7 +191,7 @@ const Starter = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
-            Close
+           Zavřít
           </Button>
         </Modal.Footer>
       </Modal>

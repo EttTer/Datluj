@@ -12,6 +12,7 @@ h2 {
    
    background-image: url("../../../public/pictures/Group1.svg");
   background-position: bottom right;
+  background-size: contain;
   background-repeat: no-repeat;
 
 }

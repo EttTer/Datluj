@@ -83,7 +83,7 @@ const Stage = () => {
   const restartGame = () => {
     setIsGameStarted(true);
     setMistakes(0);
-    setTimeLeft(20);
+    setTimeLeft(10);
     setWordsWritten(0);
     setMistakeWords([]);
     setMistakesByWord([0, 0, 0]);
@@ -107,7 +107,7 @@ const Stage = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
     if (timeLeft === 0) {
-      const playerName = prompt("Please enter your name:");
+      const playerName = prompt("Prosím zadejte jméno hráče do listiny výsledků:");
 
       if (playerName && playerName.trim() !== "") {
         setPlayerName(playerName);
@@ -176,33 +176,34 @@ const Stage = () => {
       <div className="stage__buttons">
         {isGameStarted && timeLeft > 0 && (
           <button onClick={handleTogglePause}>
-            {isPaused ? 'Resume Game' : 'Pause Game'}
+            {isPaused ? 'Pokračovat ve hře' : 'Pauza'}
           </button>
         )}
         {isGameStarted && (
-          <button onClick={restartGame}>Start New Game</button>
+          <button onClick={restartGame}>Začít novou hru</button>
         )}
         {!isGameStarted && timeLeft === 0 && (
-          <button onClick={restartGame}>Start New Game</button>
+          <button onClick={restartGame}>Začít novou hru</button>
         )}
         {!isGameStarted && timeLeft > 0 && (
-          <button onClick={restartGame}>Start Game</button>
+          <button onClick={restartGame}>Začít hru</button>
         )}
       </div>
       
 
-      <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
-        <Modal.Header closeButton>
-          <Modal.Title>Game Over</Modal.Title>
+      <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal"
+      centered>
+        <Modal.Header >
+          <Modal.Title>Konec hry</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>Napsal(a) jsi {wordsWritten} slov a udělal(a) jsi {mistakes} chyb.</p>
           {mistakeWords.length > 0 && (
             <div>
               <p>Slova s chybami:</p>
-              <ul>
+              <ul className='list'>
                 { [...new Set(mistakeWords)].map(word => (
-                  <li key={word}>{word} - {mistakeWords.filter(w => w === word).length} mistake(s)</li>
+                  <li key={word}>slovo : {word} - {mistakeWords.filter(w => w === word).length} chyb</li>
                 ))}
               </ul>
             </div>
@@ -210,7 +211,7 @@ const Stage = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
-            Close
+            Zavřít
           </Button>
         </Modal.Footer>
       </Modal>
