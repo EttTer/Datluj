@@ -1,0 +1,36 @@
+
+
+.subtitles_container {
+    position: relative;
+    height: 150px;
+   
+    background-image: url("../../../public/pictures/picture3.png");
+   background-position: bottom right;
+   background-size: contain;
+   background-repeat: no-repeat;
+
+}
+
+  .results {
+    height:auto;
+    display: flex;
+    justify-content: center;
+    gap:60px;
+
+  margin: 60px 20px;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  .subtitle {
+    color: #9D2D1A ;
+    margin-top: 80px;
+  }
+
+  .score{
+    color: #9D2D1A;
+    font-size: medium;
+    text-align: center;
+  }

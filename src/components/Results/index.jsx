@@ -47,41 +47,47 @@ const Result = () => {
 
     return (
         <>
+         <div className='Stage_page_container'>
+      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
+      <button className='Start_page_button'><Link className to="/stage">Hra s časovým limitem</Link></button>
+      
+      <button className='Start_page_button'><Link to="/starter">Procvičování bez limitu</Link></button></div>
+ 
             <div> {error && <p> {error}</p>}</div>
-            <div>
-                <div>
-                    <h2>Players</h2>
+            <div className='subtitles_container'>
+            <h2 className='subtitle'> Výsledky</h2>
+            <p className='description'> Pořadí výsledků se řídí hodnotou skóre - počet napsaný slov - chyby</p>
+            </div>
+            <div className='results'>
+                <div className='results_container'>
+                    <h2 className='subtitle'>Časový limit</h2>
                     {sortedPlayersData.map((onePlayer) => {
                         const { id, playerName, mistakes, wordsWritten } = onePlayer;
                         const difference = wordsWritten - mistakes;
                         return (
                             <div key={id}>
-                                <p>{playerName}</p>
-                                <p>Mistakes: {mistakes}</p>
-                                <p>Words Written: {wordsWritten}</p>
-                                <p>WordsWritten - Mistakes: {difference}</p>
+                                <p> Hráč: {playerName} udělal {mistakes} chyb.</p>
+                                <p>Napsal(a) špatně {wordsWritten} slov a získal(a)</p>
+                                <p className='score'>skóre {difference}</p><hr></hr>
                             </div>
                         );
                     })}
                 </div>
-                <div>
-                    <h2>Starters</h2>
+                <div className='results_container2'>
+                    <h2 className='subtitle'>Procvičování</h2>
                     {sortedStartersData.map((oneStarter) => {
                         const { id, playerName, mistakes, wordsWritten } = oneStarter;
                         const difference = wordsWritten - mistakes;
                         return (
                             <div key={id}>
-                                <p>{playerName}</p>
-                                <p>Mistakes: {mistakes}</p>
-                                <p>Words Written: {wordsWritten}</p>
-                                <p>WordsWritten - Mistakes: {difference}</p>
+                                <p> Hráč: {playerName} udělal {mistakes} chyb.</p>
+                                <p>Napsal(a) špatně {wordsWritten} a získal(a)</p>
+                                <p className='score'>skóre {difference}</p><hr></hr>
                             </div>
                         );
                     })}
                 </div>
-                <Link to="/stage">Přejít na Stage</Link>
-                <Link to="/starter">Přejít na Starter</Link>
-                <Link to="/">Domů</Link>
+                
             </div>
         </>
     );
