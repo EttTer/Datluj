@@ -80,7 +80,7 @@ const Starter = () => {
   };
 
   const handleGameEnd = () => {
-    const playerName = prompt("Please enter your name:");
+    const playerName = prompt("Prosím zadejte jméno hráče:");
 
     if (playerName && playerName.trim() !== "") {
       setPlayerName(playerName);
@@ -181,11 +181,11 @@ const Starter = () => {
           {mistakeWords.length > 0 && (
             <div>
               <p>Slova s chybami:</p>
-              <ul>
+              <p>
                 { [...new Set(mistakeWords)].map(word => (
                   <li key={word}>slovo: {word} - {mistakeWords.filter(w => w === word).length} chyb</li>
                 ))}
-              </ul>
+              </p>
             </div>
           )}
         </Modal.Body>

@@ -67,7 +67,7 @@ const Result = () => {
                         return (
                             <div key={id}>
                                 <p> Hráč: {playerName} udělal {mistakes} chyb.</p>
-                                <p>Napsal(a) špatně {wordsWritten} slov a získal(a)</p>
+                                <p>Napsal(a) dobře {wordsWritten} slov a získal(a)</p>
                                 <p className='score'>skóre {difference}</p><hr></hr>
                             </div>
                         );
@@ -81,7 +81,7 @@ const Result = () => {
                         return (
                             <div key={id}>
                                 <p> Hráč: {playerName} udělal {mistakes} chyb.</p>
-                                <p>Napsal(a) špatně {wordsWritten} a získal(a)</p>
+                                <p>Napsal(a) dobře {wordsWritten} a získal(a)</p>
                                 <p className='score'>skóre {difference}</p><hr></hr>
                             </div>
                         );

@@ -201,11 +201,11 @@ const Stage = () => {
           {mistakeWords.length > 0 && (
             <div>
               <p>Slova s chybami:</p>
-              <ul className='list'>
+              <p className='list'>
                 { [...new Set(mistakeWords)].map(word => (
                   <li key={word}>slovo : {word} - {mistakeWords.filter(w => w === word).length} chyb</li>
                 ))}
-              </ul>
+              </p>
             </div>
           )}
         </Modal.Body>
