@@ -15,11 +15,11 @@
 }
 
 .wordbox--mistake {
-  background-color: #9D2D1A;
+  background-color: #9d2d1a;
   color: white;
 }
 
 .wordbox--active {
-  background-color:#727272 ; /* nebo jakoukoli jinou formu zdůraznění */
-  color: #ffffff; 
+  background-color: #727272; /* nebo jakoukoli jinou formu zdůraznění */
+  color: #ffffff;
 }

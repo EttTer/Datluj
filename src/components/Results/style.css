@@ -1,39 +1,35 @@
-
-
 .subtitles_container {
-    position: relative;
-    height: 150px;
-   
-    background-image: url("../../../public/pictures/picture3.png");
-   background-position: bottom right;
-   background-size: contain;
-   background-repeat: no-repeat;
+  position: relative;
+  height: 150px;
 
+  background-image: url("../../../public/pictures/picture3.png");
+  background-position: bottom right;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-  .results {
-    height:auto;
-    display: flex;
-    justify-content: center;
-    gap:60px;
-  }
+.results {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
 
-  .description {
-    text-align: center;
-  }
+.description {
+  text-align: center;
+}
 
-  .subtitle {
-    color: #9D2D1A ;
-    
-  }
+.subtitle {
+  color: #9d2d1a;
+}
 
-  .score{
-    color: #9D2D1A;
-    font-size: medium;
-    text-align: center;
-  }
+.score {
+  color: #9d2d1a;
+  font-size: medium;
+  text-align: center;
+}
 
-  .title {
-    color: #9D2D1A ;
-    margin-top: 80px;
-  }
+.title {
+  color: #9d2d1a;
+  margin-top: 80px;
+}

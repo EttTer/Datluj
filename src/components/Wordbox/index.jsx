@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
+import React, { useState, useEffect } from "react";
+import "./style.css";
 
-const Wordbox = ({ word, onFinish, active, onMistake, wordIndex, wordsWritten }) => {
+const Wordbox = ({
+  word,
+  onFinish,
+  active,
+  onMistake,
+  wordIndex,
+  wordsWritten,
+}) => {
   const [lettersLeft, setLettersLeft] = useState(word);
   const [mistake, setMistake] = useState(false);
 
@@ -10,10 +17,10 @@ const Wordbox = ({ word, onFinish, active, onMistake, wordIndex, wordsWritten })
       const handleKeyUp = (event) => {
         const userInput = event.key;
         if (lettersLeft.includes(userInput)) {
-          const updatedLetters = lettersLeft.replace(userInput, '');
+          const updatedLetters = lettersLeft.replace(userInput, "");
           setLettersLeft(updatedLetters);
 
-          if (updatedLetters === '') {
+          if (updatedLetters === "") {
             onFinish(wordIndex);
           }
         } else {
@@ -22,19 +29,19 @@ const Wordbox = ({ word, onFinish, active, onMistake, wordIndex, wordsWritten })
         }
       };
 
-      document.addEventListener('keyup', handleKeyUp);
+      document.addEventListener("keyup", handleKeyUp);
 
       return () => {
-        document.removeEventListener('keyup', handleKeyUp);
+        document.removeEventListener("keyup", handleKeyUp);
       };
     }
   }, [lettersLeft, onFinish, active, onMistake, wordIndex]);
 
   const wordboxClassName = mistake
-    ? 'wordbox wordbox--mistake'
+    ? "wordbox wordbox--mistake"
     : active
-    ? 'wordbox wordbox--active'
-    : 'wordbox';
+    ? "wordbox wordbox--active"
+    : "wordbox";
 
   useEffect(() => {
     if (!lettersLeft && mistake) {
@@ -46,8 +53,6 @@ const Wordbox = ({ word, onFinish, active, onMistake, wordIndex, wordsWritten })
 };
 
 export default Wordbox;
-
-
 
 /* čtvrtý úkol
 import React, { useState, useEffect } from 'react';
@@ -270,9 +275,6 @@ const Wordbox = ({ word }) => {
 };
 
 export default Wordbox; */
-
-
-
 
 /* kod s přidáním props onFinish
 import React, { useState, useEffect } from 'react';

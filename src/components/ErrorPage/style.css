@@ -1,0 +1,14 @@
+.Error_stage {
+  position: relative;
+
+  background-image: url("../../../public/pictures/Group3.svg");
+  background-position: bottom right;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  width: 1000px;
+  margin: 30vh auto;
+  background-color: #efefef;
+  padding: 50px 40px;
+  border-radius: 5px;
+}

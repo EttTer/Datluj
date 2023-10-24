@@ -1,28 +1,30 @@
 import Stage from "./components/Stage";
 import StartPage from "./components/StartPage";
-import React, { useState } from 'react';
-import Starter from "./components/Starter"
-import { createRoot } from 'react-dom/client';
+import React, { useState } from "react";
+import Starter from "./components/Starter";
+import ErrorPage from "./components/ErrorPage";
+import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import './style.css';
+import "./style.css";
 import Result from "./components/Results";
 import { projectFirestore } from "./firebase/config";
-import background from "../public/pictures/background.png"
-
+import background from "../public/pictures/background.png";
 
 const App = () => {
-  return (  <><header>
+  return (
+    <>
+      <header>
         <div className="header-text"></div>
       </header>
-    <div className="container">
-    
-      <main>
-        <Outlet />
-      </main>
-    </div>
+      <div className="container">
+        <main>
+          <Outlet />
+        </main>
+      </div>
       <footer>
         <p className="footer-text"> © Tereza Ettlerová</p>
-      </footer></>
+      </footer>
+    </>
   );
 };
 
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <h3>Upss.....404 - MUCK</h3>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -46,15 +48,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/result",
-        element: <Result/>,
+        element: <Result />,
       },
     ],
   },
 ]);
 
 createRoot(document.querySelector("#app")).render(
-  <RouterProvider router={router} />)
-
+  <RouterProvider router={router} />
+);
 
 /*import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';

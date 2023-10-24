@@ -1,17 +1,16 @@
 .custom-modal {
-    position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    z-index: 1050; 
-    background-color:  #9D2D1A;;
-    color: white;
-    text-align: center;
-    padding: 80px;
-    border-radius: 5px;
-  }
-  
-  
-  .list {
-    list-style: none;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050;
+  background-color: #9d2d1a;
+  color: white;
+  text-align: center;
+  padding: 80px;
+  border-radius: 5px;
+}
+
+.list {
+  list-style: none;
+}

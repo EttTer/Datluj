@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import Wordbox from '../Wordbox';
-import wordList from '../../word-list';
-import './style.css';
-import { Link } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import { projectFirestore } from '../../firebase/config';
+import React, { useState, useEffect } from "react";
+import Wordbox from "../Wordbox";
+import wordList from "../../word-list";
+import "./style.css";
+import { Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { projectFirestore } from "../../firebase/config";
 
 const generateWord = (size) => {
-  const sizeIndex = size === undefined
-    ? Math.floor(Math.random() * wordList.length)
-    : size - 3;
-  
+  const sizeIndex =
+    size === undefined ? Math.floor(Math.random() * wordList.length) : size - 3;
+
   if (sizeIndex < 0 || sizeIndex >= wordList.length) {
     return null;
   }
-  
+
   const words = wordList[sizeIndex];
   const wordIndex = Math.floor(Math.random() * words.length);
   return words[wordIndex];
@@ -36,35 +35,37 @@ const Starter = () => {
   const generateNewWords = () => {
     const newWords = [...Array(3)].map(() => generateWord(wordsLength));
     setWords(newWords);
-  }
-
+  };
 
   const handleFinish = (wordIndex) => {
-    const newWords = [...words.slice(1), generateWord(wordsLength)]; 
+    const newWords = [...words.slice(1), generateWord(wordsLength)];
     setWords(newWords);
-    setWordsWritten(prevWordsWritten => prevWordsWritten + 1);
+    setWordsWritten((prevWordsWritten) => prevWordsWritten + 1);
 
     const newMistakesByWord = [...mistakesByWord];
     newMistakesByWord[wordIndex] = 0;
     setMistakesByWord(newMistakesByWord);
 
-    if (wordsWritten === 2) { 
-      const newWords = [...words.slice(2), generateWord(3), generateWord(3)]; 
+    if (wordsWritten === 2) {
+      const newWords = [...words.slice(2), generateWord(3), generateWord(3)];
       setWords(newWords);
-      setWordsWritten(prevWordsWritten => prevWordsWritten + 2); 
+      setWordsWritten((prevWordsWritten) => prevWordsWritten + 2);
     }
 
-    if (wordsWritten % 5 === 0 && wordsWritten > 0) { 
-      if (wordsLength < 20) { 
-        setWordsLength(prevLength => prevLength + 1); 
+    if (wordsWritten % 5 === 0 && wordsWritten > 0) {
+      if (wordsLength < 20) {
+        setWordsLength((prevLength) => prevLength + 1);
         generateNewWords();
       }
     }
   };
 
   const handleMistake = (wordIndex) => {
-    setMistakes(prevMistakes => prevMistakes + 1);
-    setMistakeWords(prevMistakeWords => [...prevMistakeWords, words[wordIndex]]);
+    setMistakes((prevMistakes) => prevMistakes + 1);
+    setMistakeWords((prevMistakeWords) => [
+      ...prevMistakeWords,
+      words[wordIndex],
+    ]);
   };
 
   const restartGame = () => {
@@ -90,34 +91,33 @@ const Starter = () => {
       let message = `The game has ended. You wrote ${wordsWritten} word(s) and made ${mistakes} mistake(s).\n\n`;
 
       if (mistakeWords.length > 0) {
-        message += 'Words with mistakes:\n';
+        message += "Words with mistakes:\n";
         const uniqueMistakeWords = [...new Set(mistakeWords)];
 
         uniqueMistakeWords.forEach((word) => {
-          const mistakesInWord = mistakeWords.filter(w => w === word).length;
+          const mistakesInWord = mistakeWords.filter((w) => w === word).length;
           message += `Word ${word} - ${mistakesInWord} mistake(s)\n`;
         });
       }
 
       const result = {
         playerName: playerName,
-        wordsWritten: wordsWritten, 
-        mistakes: mistakes
+        wordsWritten: wordsWritten,
+        mistakes: mistakes,
       };
 
       const results = JSON.parse(localStorage.getItem("results")) || [];
       results.push(result);
       localStorage.setItem("results", JSON.stringify(results));
 
-
       const firebaseResult = {
         playerName: playerName,
-        wordsWritten: wordsWritten, 
-        mistakes: mistakes
-      }
+        wordsWritten: wordsWritten,
+        mistakes: mistakes,
+      };
 
       try {
-         projectFirestore.collection("starters").add(firebaseResult);
+        projectFirestore.collection("starters").add(firebaseResult);
         console.log("Výsledky hráče byly přidány");
       } catch (error) {
         console.error("Přidání hráče selhalo ", error);
@@ -135,67 +135,82 @@ const Starter = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setIsGameStarted(prev => !prev); // toggle
+    setIsGameStarted((prev) => !prev); // toggle
   };
 
   return (
-<>
-    <div className='Stage_page_container'>
-      <button className='Start_page_button'><Link to="/">Úvodní strana</Link></button>
-      <button className='Start_page_button'><Link className to="/stage">Hra s časovým limitem</Link></button>
-      
-      <button className='Start_page_button'><Link to="/result">Výsledky</Link></button></div>
- 
-   
-    <div className="stage">
-      <h2 className="stage__mistakes">Chyb: {mistakes}</h2>
-      <div className="stage__words">
-        {words.map((word, index) => (
-          <Wordbox 
-            word={word} 
-            key={word} 
-            onFinish={() => handleFinish(index)} 
-            active={index === 0} 
-            onMistake={() => handleMistake(index)}  
-            wordIndex={index}
-          />
-        ))}
-      </div>
-      <div className="stage__buttons">
-        {isGameStarted && (
-          <button onClick={handleGameEnd}>
-            Konec hry
-          </button>
-        )}
-        {!isGameStarted && (
-          <button onClick={restartGame}>Začít novou hru</button>
-        )}
+    <>
+      <div className="Stage_page_container">
+        <button className="Start_page_button">
+          <Link to="/">Úvodní strana</Link>
+        </button>
+        <button className="Start_page_button">
+          <Link className to="/stage">
+            Hra s časovým limitem
+          </Link>
+        </button>
+
+        <button className="Start_page_button">
+          <Link to="/result">Výsledky</Link>
+        </button>
       </div>
 
-      <Modal show={isModalOpen} onHide={handleModalClose} className="custom-modal">
-        <Modal.Header>
-          <Modal.Title>Konec hry</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Napsal(a) jsi {wordsWritten} slov u dělal(a) v nich  {mistakes} chyb.</p>
-          {mistakeWords.length > 0 && (
-            <div>
-              <p>Slova s chybami:</p>
-              <p>
-                { [...new Set(mistakeWords)].map(word => (
-                  <li key={word}>slovo: {word} - {mistakeWords.filter(w => w === word).length} chyb</li>
-                ))}
-              </p>
-            </div>
+      <div className="stage">
+        <h2 className="stage__mistakes">Chyb: {mistakes}</h2>
+        <div className="stage__words">
+          {words.map((word, index) => (
+            <Wordbox
+              word={word}
+              key={word}
+              onFinish={() => handleFinish(index)}
+              active={index === 0}
+              onMistake={() => handleMistake(index)}
+              wordIndex={index}
+            />
+          ))}
+        </div>
+        <div className="stage__buttons">
+          {isGameStarted && <button onClick={handleGameEnd}>Konec hry</button>}
+          {!isGameStarted && (
+            <button onClick={restartGame}>Začít novou hru</button>
           )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-           Zavřít
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div></>
+        </div>
+
+        <Modal
+          show={isModalOpen}
+          onHide={handleModalClose}
+          className="custom-modal"
+        >
+          <Modal.Header>
+            <Modal.Title>Konec hry</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>
+              Napsal(a) jsi {wordsWritten} slov u dělal(a) v nich {mistakes}{" "}
+              chyb.
+            </p>
+            {mistakeWords.length > 0 && (
+              <div>
+                <p>Slova s chybami:</p>
+                <p>
+                  {[...new Set(mistakeWords)].map((word) => (
+                    <li key={word}>
+                      slovo: {word} -{" "}
+                      {mistakeWords.filter((w) => w === word).length} chyb
+                    </li>
+                  ))}
+                </p>
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleModalClose}>
+              Zavřít
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    </>
   );
 };
 
